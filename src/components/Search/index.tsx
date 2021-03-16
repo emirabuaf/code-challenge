@@ -12,7 +12,7 @@ const Search:React.FC<SearchProps> = ({handleSearch, search}) => {
   }
   return (
     <div >
-      <input value={search} onChange={handleChange} />
+      <input placeholder='Search for a movie' value={search} onChange={handleChange} />
     </div>
   );
 }
