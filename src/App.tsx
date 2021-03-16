@@ -1,12 +1,13 @@
 import React, { useState,useEffect } from 'react';
 import './App.css';
 import Search from './components/Search';
+import MovieList from './components/MovieList'
 
 const API_KEY = "c05820ad"
 
 const App = () => {
-  const [movies,setMovies] = useState(null)
-  const [query, setQuery] = useState('harry potter');
+  const [movies,setMovies] = useState([])
+  const [query, setQuery] = useState('');
 
 
   useEffect(() => {
@@ -20,7 +21,8 @@ const App = () => {
 
   return (
     <div className="App">
-      <Search />
+      <Search search={query} handleSearch={setQuery} />
+      <MovieList movies={movies} />
     </div>
   );
 }

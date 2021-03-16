@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, Dispatch, SetStateAction } from 'react';
 
+interface SearchProps {
+  handleSearch: Dispatch<SetStateAction<string>>,
+  search: string;
+}
 
+const Search:React.FC<SearchProps> = ({handleSearch, search}) => {
 
-const Search = () => {
+  const handleChange = (e:any) => {
+    handleSearch(e.target.value);
+  }
   return (
     <div >
-      <input />
+      <input value={search} onChange={handleChange} />
     </div>
   );
 }
