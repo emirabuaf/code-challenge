@@ -37,15 +37,12 @@ const App = () => {
 
   return (
     <div className="App">
-      {!error ? (
-        <div>
-          <Search search={query} handleSearch={setQuery} />
-          <Loader loading={loading} />
-          <MovieList query={query} movies={movies} />
-        </div>
-      ) : (
-        <p>Unable to receive data</p>
-      )}
+      <div>
+        <Search search={query} handleSearch={setQuery} />
+        <Loader loading={loading} />
+        <MovieList query={query} movies={movies} />
+      </div>
+      {error ? <p className="error-message">Please keep typing, your search will display!</p> : null}
     </div>
   );
 };
