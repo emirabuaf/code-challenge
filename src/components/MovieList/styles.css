@@ -1,3 +1,27 @@
 .movielist {
-  display: block;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.movie-title {
+  width: 300px;
+  display: flex;
+  justify-content: center;
+}
+
+.movie-container {
+  border: 2px solid slategray;
+  margin: 20px;
+  padding: 10px;
+}
+
+.movie-container > img {
+  height: 400px;
+  width: 300px;
+  opacity: 0.5;
+}
+
+.highlight {
+  background-color: yellow;
 }

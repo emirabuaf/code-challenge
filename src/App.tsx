@@ -10,14 +10,19 @@ const App = () => {
   const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState("");
   const [loading, setLoader] = useState(false);
+  
 
   useEffect(() => {
     setLoader(true);
+  },[])
+
+  useEffect(() => {
     fetch(`http://www.omdbapi.com/?s=${query}&apikey=${API_KEY}`)
       .then((response) => response.json())
       .then((data) => {
         setMovies(data);
         setLoader(false)
+        console.log(data)
       })
       .catch((error) => {
         console.log(error);
@@ -28,7 +33,7 @@ const App = () => {
     <div className="App">
       <Search search={query} handleSearch={setQuery} />
       <Loader loading={loading}/>
-      <MovieList movies={movies} />
+      <MovieList query={query} movies={movies} />
     </div>
   );
 };

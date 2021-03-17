@@ -1,4 +1,5 @@
 import React, { useState, Dispatch, SetStateAction } from 'react';
+import './styles.css';
 
 interface SearchProps {
   handleSearch: Dispatch<SetStateAction<string>>,
@@ -12,7 +13,7 @@ const Search:React.FC<SearchProps> = ({handleSearch, search}) => {
   }
   return (
     <div >
-      <input placeholder='Search for a movie' value={search} onChange={handleChange} />
+      <input className='input-text' placeholder='Search for a movie' value={search} onChange={handleChange} />
     </div>
   );
 }
