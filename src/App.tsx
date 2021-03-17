@@ -10,30 +10,38 @@ const App = () => {
   const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState("");
   const [loading, setLoader] = useState(false);
-  
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     setLoader(true);
-  },[])
+  }, []);
 
   useEffect(() => {
     fetch(`http://www.omdbapi.com/?s=${query}&apikey=${API_KEY}`)
       .then((response) => response.json())
       .then((data) => {
         setMovies(data);
-        setLoader(false)
-        console.log(data)
+        setLoader(false);
+        console.log(data);
+        setError(false)
       })
       .catch((error) => {
         console.log(error);
+        setError(true);
       });
   }, [query]);
 
   return (
     <div className="App">
-      <Search search={query} handleSearch={setQuery} />
-      <Loader loading={loading}/>
-      <MovieList query={query} movies={movies} />
+      {!error ? (
+        <div>
+          <Search search={query} handleSearch={setQuery} />
+          <Loader loading={loading} />
+          <MovieList query={query} movies={movies} />
+        </div>
+      ) : (
+        <p>Unable to receive data</p>
+      )}
     </div>
   );
 };
