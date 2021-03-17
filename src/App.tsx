@@ -19,6 +19,8 @@ const App = () => {
     }, 1000);
   }, []);
 
+
+
   useEffect(() => {
     if (query !== "") {
       fetch(`http://www.omdbapi.com/?s=${query}&apikey=${API_KEY}`)
@@ -37,12 +39,15 @@ const App = () => {
 
   return (
     <div className="App">
-      <div>
-        <Search search={query} handleSearch={setQuery} />
-        <Loader loading={loading} />
-        <MovieList query={query} movies={movies} />
-      </div>
-      {error ? <p className="error-message">Please keep typing, your search will display!</p> : null}
+      {!error ? (
+        <div>
+          <Search search={query} handleSearch={setQuery} />
+          <Loader loading={loading} />
+          <MovieList query={query} movies={movies} />
+        </div>
+      ) : (
+        <p>Unable to receive data</p>
+      )}
     </div>
   );
 };
