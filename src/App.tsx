@@ -14,20 +14,25 @@ const App = () => {
 
   useEffect(() => {
     setLoader(true);
+    setInterval(() => {
+      setLoader(false);
+    }, 1000);
   }, []);
 
   useEffect(() => {
-    fetch(`http://www.omdbapi.com/?s=${query}&apikey=${API_KEY}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setMovies(data);
-        setLoader(false);
-        setError(false)
-      })
-      .catch((error) => {
-        console.log(error);
-        setError(true);
-      });
+    if (query !== "") {
+      fetch(`http://www.omdbapi.com/?s=${query}&apikey=${API_KEY}`)
+        .then((response) => response.json())
+        .then((data) => {
+          setMovies(data);
+          setLoader(false);
+          setError(false);
+        })
+        .catch((error) => {
+          console.log(error);
+          setError(true);
+        });
+    }
   }, [query]);
 
   return (
