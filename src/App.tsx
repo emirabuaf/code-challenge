@@ -22,7 +22,6 @@ const App = () => {
       .then((data) => {
         setMovies(data);
         setLoader(false);
-        console.log(data);
         setError(false)
       })
       .catch((error) => {
