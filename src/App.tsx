@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Search from "./components/Search";
 import MovieList from "./components/MovieList";
