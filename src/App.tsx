@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useCallback } from "react";
 import "./App.css";
 import Search from "./components/Search";
 import MovieList from "./components/MovieList";
 import Loader from "./components/Loader";
+import useDebounce from "./custom-hook/useDebounce";
+
 
 const API_KEY = "c05820ad";
 
@@ -12,6 +14,8 @@ const App = () => {
   const [loading, setLoader] = useState(false);
   const [error, setError] = useState(false);
 
+  const debouncedQuery = useDebounce(query, 1000);
+
   useEffect(() => {
     setLoader(true);
     setInterval(() => {
@@ -20,22 +24,23 @@ const App = () => {
   }, []);
 
 
-
   useEffect(() => {
-    if (query !== "") {
-      fetch(`http://www.omdbapi.com/?s=${query}&apikey=${API_KEY}`)
+    if (debouncedQuery) {
+      setLoader(true)
+      fetch(`http://www.omdbapi.com/?s=${debouncedQuery}&apikey=${API_KEY}`)
         .then((response) => response.json())
         .then((data) => {
           setMovies(data);
-          setLoader(false);
           setError(false);
         })
         .catch((error) => {
           console.log(error);
           setError(true);
         });
+    } else {
+      setMovies([])
     }
-  }, [query]);
+  }, [debouncedQuery]);
 
   return (
     <div className="App">
