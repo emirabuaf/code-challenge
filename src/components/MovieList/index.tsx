@@ -3,7 +3,7 @@ import "./styles.css";
 
 interface MovieList {
   movies: any;
-  debounce: any;
+  debounce: string;
 }
 
 const MovieList: React.FC<MovieList> = ({ movies, debounce }) => {
