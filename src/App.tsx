@@ -46,9 +46,9 @@ const App = () => {
     <div className="App">
       {!error ? (
         <div>
-          <Search search={query} handleSearch={setQuery} />
+          <Search  search={query} handleSearch={setQuery} />
           <Loader loading={loading} />
-          <MovieList query={query} movies={movies} />
+          <MovieList debounce={debouncedQuery} movies={movies} />
         </div>
       ) : (
         <p>Unable to receive data</p>
